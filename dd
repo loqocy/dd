@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+
+class PhoneBook
+{
+    static void Main(string[] args)
+    {
+        // Создание словаря для телефонной книги
+        Dictionary<string, string> phoneBook = new Dictionary<string, string>();
+
+        // Флаг для управления циклом меню
+        bool running = true;
+
+        while (running)
+        {
+            // Вывод меню
+            Console.WriteLine("Телефонная книга");
+            Console.WriteLine("1. Добавить запись");
+            Console.WriteLine("2. Найти номер по имени");
+            Console.WriteLine("3. Вывести все записи");
+            Console.WriteLine("4. Выход");
+            Console.WriteLine("Введите номер опции:");
+
+            // Чтение выбора пользователя
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    // Добавление новой записи
+                    Console.WriteLine("Введите имя:");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Введите номер телефона:");
+                    string number = Console.ReadLine();
+                    phoneBook[name] = number;
+                    Console.WriteLine("Запись добавлена.");
+                    break;
+
+                case 2:
+                    // Поиск номера по имени
+                    Console.WriteLine("Введите имя:");
+                    name = Console.ReadLine();
+                    if (phoneBook.ContainsKey(name))
+                    {
+                        Console.WriteLine("Номер телефона: " + phoneBook[name]);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Имя не найдено в телефонной книге.");
+                    }
+                    break;
+
+                case 3:
+                    // Вывод всех записей
+                    if (phoneBook.Count == 0)
+                    {
+                        Console.WriteLine("Телефонная книга пуста.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Все записи:");
+                        foreach (KeyValuePair<string, string> entry in phoneBook)
+                        {
+                            Console.WriteLine(entry.Key + ": " + entry.Value);
+                        }
+                    }
+                    break;
+
+                case 4:
+                    // Выход из программы
+                    running = false;
+                    break;
+
+                default:
+                    Console.WriteLine("Неверный выбор.");
+                    break;
+            }
+
+            Console.WriteLine();
+        }
+    }
+}
